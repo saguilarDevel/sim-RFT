@@ -1,13 +1,58 @@
 from __future__ import division
 import numpy as np
 import random
-import time, datetime
+import time
+import datetime
 #import matplotlib.pyplot as plt
 from collections import defaultdict
 #from PIL import Image
 from TOA import *
 import os.path
 import math
+import os
+
+
+'''Sim-RFT Configuration values'''
+RANDOM = 'RANDOM'
+BURST = 'BURST'
+#Bitmap generation mode
+BITMAP_GENERATION = BURST
+#Size of FN for the List of Lost Fragments
+list_of_fragments_numbers_lenght = 7 #bits
+#Min bitmap size in simulation
+bitmap_size = 10
+#Max bitmap size in simulation
+bitmap_size_max = 11
+#delta in simulation
+bitmap_delta = 1
+#Number of simulations
+repetitions = 1000000
+#LoRa Payload size (frame size - ack headers)
+#frame size = 11 bytes, ACK headers = 1 byte
+LORA_PAYLOAD = 10
+SIGFOX_PAYLOAD = 11
+#Configuration values
+PRINT_PDF = False
+SHOW_BITMAP_IMAGE = False
+SHOW_POISSON_GRAPH = False
+SHOW_BURST_GRAPH = False
+WRITE_TO_file = True
+PRINT_ALL = False
+#repetitions = 10
+'''Burst Occurrance Probability (probability to enter a burst) BOP * 100 = % example 0.01 * 100 = 1%'''
+FER = 0.02
+#Repetitions to calculate Poisson distributions
+poisson_repetitions = 10000000
+'''Burst length (lamba) value '''
+poisson_lambda = 10
+
+'''Fragment error rate (Random probability) FER % -> 10 %'''
+FER_RANDOM = 20
+
+'''Save path for output files'''
+save_path = 'graphs/'
+script_dir = os.path.dirname(__file__)
+save_path = os.path.join(script_dir, save_path)
 
 #Variables for TOA results
 list_of_deltas_sdnv_2_results_TOA = defaultdict(float)
@@ -138,45 +183,6 @@ def frames_calculation(payload_size, results_dic):
 
 
 
-'''Sim-RFT Configuration values'''
-RANDOM = 'RANDOM'
-BURST = 'BURST'
-#Bitmap generation mode
-BITMAP_GENERATION = BURST
-#Size of FN for the List of Lost Fragments
-list_of_fragments_numbers_lenght = 7 #bits
-#Min bitmap size in simulation
-bitmap_size = 10
-#Max bitmap size in simulation
-bitmap_size_max = 12
-#delta in simulation
-bitmap_delta = 1
-#Number of simulations
-repetitions = 1000000
-#LoRa Payload size (frame size - ack headers)
-#frame size = 11 bytes, ACK headers = 1 byte
-LORA_PAYLOAD = 10
-SIGFOX_PAYLOAD = 11
-#Configuration values
-PRINT_PDF = False
-SHOW_BITMAP_IMAGE = False
-SHOW_POISSON_GRAPH = False
-SHOW_BURST_GRAPH = False
-WRITE_TO_file = True
-PRINT_ALL = False
-#repetitions = 10
-'''Fragment error rate (probability to enter a burst) FER * 100 = % 0.01 * 100 = 1%'''
-FER = 0.02
-#Repetitions to calculate Poisson distributions
-poisson_repetitions = 10000000
-'''Burst average value '''
-poisson_lambda = 10
-
-'''Fragment error rate (Random probability) FER % -> 10 %'''
-FER_RANDOM = 20
-
-'''Save path for output files'''
-save_path = '/Users/sergioaguilar/Dropbox/Phd/Article_packetMode/code/sim-RFT/graphs/'
 
 
 print 'FER -> ' + str(FER*100) + '%'
