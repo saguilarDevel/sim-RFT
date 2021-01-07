@@ -12,45 +12,46 @@ import math
 import os
 
 
-'''Sim-RFT Configuration values'''
+# Sim-RFT Configuration values
 RANDOM = 'RANDOM'
 BURST = 'BURST'
-#Bitmap generation mode
-BITMAP_GENERATION = BURST
-#Size of FN for the List of Lost Fragments
+# Fragment error rate (Random probability) FER % -> 10 %
+FER_RANDOM = 1
+# Burst Occurrance Probability (probability to enter a burst) BOP * 100 = % example 0.01 * 100 = 1%
+FER = 0.01
+# Repetitions to calculate Poisson distributions
+poisson_repetitions = 10000000
+# Burst length (lamba) value
+poisson_lambda = 10
+# Bitmap generation mode
+BITMAP_GENERATION = RANDOM
+# Size of FN for the List of Lost Fragments
 list_of_fragments_numbers_lenght = 7 #bits
-#Min bitmap size in simulation
-bitmap_size = 10
-#Max bitmap size in simulation
-bitmap_size_max = 11
-#delta in simulation
+# Min bitmap size in simulation
+bitmap_size = 2
+# Max bitmap size in simulation
+bitmap_size_max = 140
+# delta in simulation
 bitmap_delta = 1
-#Number of simulations
+# Number of simulations
 repetitions = 1000000
-#LoRa Payload size (frame size - ack headers)
-#frame size = 11 bytes, ACK headers = 1 byte
+# LoRa Payload size (frame size - ack headers)
+# frame size = 11 bytes, ACK headers = 1 byte
 LORA_PAYLOAD = 10
 SIGFOX_PAYLOAD = 11
-#Configuration values
+# Configuration values
 PRINT_PDF = False
 SHOW_BITMAP_IMAGE = False
 SHOW_POISSON_GRAPH = False
 SHOW_BURST_GRAPH = False
 WRITE_TO_file = True
 PRINT_ALL = False
-#repetitions = 10
-'''Burst Occurrance Probability (probability to enter a burst) BOP * 100 = % example 0.01 * 100 = 1%'''
-FER = 0.02
-#Repetitions to calculate Poisson distributions
-poisson_repetitions = 10000000
-'''Burst length (lamba) value '''
-poisson_lambda = 10
+# repetitions = 10
 
-'''Fragment error rate (Random probability) FER % -> 10 %'''
-FER_RANDOM = 20
 
-'''Save path for output files'''
+# Save path for output files
 save_path = 'graphs/'
+
 script_dir = os.path.dirname(__file__)
 save_path = os.path.join(script_dir, save_path)
 
